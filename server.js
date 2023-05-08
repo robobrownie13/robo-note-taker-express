@@ -11,12 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/api/notes", (req, res) => {
-  res.json(notesData.slice(1));
-});
-
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
+app.get("/api/notes", (req, res) => {
+  res.json(notesData.slice(1));
 });
 
 app.get("/notes", (req, res) => {
@@ -29,7 +29,6 @@ app.get("*", (req, res) => {
 
 function createNote(body, notesArray) {
   const newNote = body;
-  if (!Array.isArray(notesArray)) notesArray = [];
 
   if (notesArray.length === 0) notesArray.push(0);
 

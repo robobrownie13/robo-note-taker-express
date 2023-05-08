@@ -1,26 +1,8 @@
 [
-  2,
+  1,
   {
-    "title": "Blah",
-    "text": "blah",
-    "id": {
-      "title": "Test Title",
-      "text": "Test text"
-    }
-  },
-  {
-    "title": "Wow",
-    "text": "wow",
-    "id": null
-  },
-  {
-    "title": "Hey",
-    "text": "hey\nhey\nhey\nhey\nhey\nHey Kween",
-    "id": null
-  },
-  {
-    "title": "Tea",
-    "text": "Tea\nHoney\nPiping hot",
-    "id": 1
+    "title": "Grocery List",
+    "text": "Milk\nEggs\nRice\nBread\nChicken\nCookies\nBlueberries\nCucumbers\nKale\n",
+    "id": 0
   }
 ]
