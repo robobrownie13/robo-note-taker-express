@@ -1,7 +1,7 @@
 const PORT = process.env.PORT || 3001;
 const fs = require("fs");
 const path = require("path");
-
+const uuid = require("uuid");
 const express = require("express");
 const app = express();
 
@@ -27,14 +27,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
-function createNote(body, notesArray) {
-  const newNote = body;
-
-  if (notesArray.length === 0) notesArray.push(0);
-
-  body.id = notesArray[0];
-  notesArray[0]++;
-
+function createNote(id, notesArray) {
   notesArray.push(newNote);
   fs.writeFileSync(
     path.join(__dirname, "./db/db.json"),
@@ -68,3 +61,8 @@ app.delete("/api/notes/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}`);
 });
+
+// const newNote = body;
+// if (notesArray.length === 0) notesArray.push(0);
+// body.id = notesArray[0];
+// notesArray[0]++;
