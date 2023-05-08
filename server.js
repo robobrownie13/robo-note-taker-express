@@ -1,11 +1,12 @@
 const PORT = process.env.PORT || 3001;
 const fs = require("fs");
 const path = require("path");
-const uuid = require("uuid");
+const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const app = express();
 
 const notesData = require("./db/db.json");
+const id = uuidv4();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,7 +28,8 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
-function createNote(id, notesArray) {
+function createNote(id, body, notesArray) {
+  const newNote = { id, body };
   notesArray.push(newNote);
   fs.writeFileSync(
     path.join(__dirname, "./db/db.json"),
@@ -37,7 +39,7 @@ function createNote(id, notesArray) {
 }
 
 app.post("/api/notes", (req, res) => {
-  const newNote = createNote(req.body, notesData);
+  const newNote = createNote(req.id, notesData);
   res.json(newNote);
 });
 
