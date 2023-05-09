@@ -15,12 +15,12 @@
 
 ## Description
 
-This app allows the user to input whatever notes they want to keep for themselves and allows the m to delete old notes as well.
+This app allows the user to input whatever notes they want to keep for themselves and allows the m to delete old notes as well. Follow this link to deploy app: https://robo-note-taker-express.herokuapp.com/
 
 ## Preview
 
 <img src="./images/note-taker-index-start.png">
-<br>
+<br/>
 <imge src="./images/note-taker-notes-demo.png">
 
 ## Usage
