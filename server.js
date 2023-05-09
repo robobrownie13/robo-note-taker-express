@@ -5,8 +5,6 @@ const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const app = express();
 
-const id = uuidv4();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -34,7 +32,7 @@ app.post("/api/notes", (req, res) => {
     const newNote = {
       title,
       text,
-      id,
+      id: uuidv4(),
     };
 
     fs.readFile("./db/db.json", "utf8", (err, data) => {
@@ -52,22 +50,14 @@ app.post("/api/notes", (req, res) => {
   }
 });
 
-// function deleteNote(id) {
-//   for (let i = 0; i < notesArray.length; i++) {
-//     if (notesArray[i].id === id) {
-//       notesArray.splice(i, 1);
-//       fs.writeFileSync(
-//         path.join(__dirname, "./db/db.json"),
-//         JSON.stringify(notesArray, null, 2)
-//       );
-//     }
-//   }
-// }
-
-// app.delete("/api/notes/:id", (req, res) => {
-//   deleteNote(notesData, req.params.id);
-//   res.json();
-// });
+app.delete("/api/notes/:id", (req, res) => {
+  const dataJSON = JSON.parse(fs.readFileSync("db/db.json", "utf8"));
+  const newNotes = dataJSON.filter((note) => {
+    return note.id !== req.params.id;
+  });
+  fs.writeFileSync("db/db.json", JSON.stringify(newNotes));
+  res.json("Note deleted.");
+});
 
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}`);
